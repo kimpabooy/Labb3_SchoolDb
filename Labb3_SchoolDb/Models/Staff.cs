@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Labb3_SchoolDb.Models
+namespace Labb3_SchoolDb.Models;
+
+public partial class Staff
 {
-    internal class Staff
-    {
-    }
+    public int StaffId { get; set; }
+
+    public string FirstName { get; set; } = null!;
+
+    public string LastName { get; set; } = null!;
+
+    public string? Role { get; set; }
+
+    public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
+
+    public virtual ICollection<Grade> Grades { get; set; } = new List<Grade>();
 }
