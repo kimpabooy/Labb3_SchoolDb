@@ -26,10 +26,37 @@ namespace Labb3_SchoolDb
                 }
             }
         }
+        public void GetAllStudentsInAClass()
+        {
+            using (var context = new SchoolDbContext())
+            {
+                var showClass = context.Classes;
+
+                foreach (var item in context.Classes)
+                {
+                    Console.WriteLine($"{}. {item.Name}");
+                }
+            }
+            Console.WriteLine("Vilken class vill du kolla på?");
+            var userChoice = Console.ReadLine();
+            
+            //switch (userChoice)
+            //{
+            //    default:
+            //}
+        }
 
         public void AddStaff()
         {
+            using(var context = new SchoolDbContext())
+            {
+                var showClass = context.Classes;
 
+                foreach (var item in context.Classes)
+                {
+                    Console.WriteLine($"{item.Name}");
+                }
+            }
         }
 
 
