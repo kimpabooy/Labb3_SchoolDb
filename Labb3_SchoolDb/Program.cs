@@ -7,7 +7,8 @@ namespace Labb3_SchoolDb
         static void Main(string[] args)
         {
             DatabaseManager dbM = new DatabaseManager();
-            //dbM.GetAllStudents(); 
+            dbM.GetAllStudents();
+            dbM.GetAllStudentsInAClass();
             Console.ReadKey();
         }
     }
