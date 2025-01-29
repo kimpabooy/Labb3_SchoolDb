@@ -152,21 +152,58 @@ namespace Labb3_SchoolDb
         {
             using (var context = new SchoolDbContext())
             {
-                Console.WriteLine("Vänligen ange informationen nedan\n");
-                Console.Write("Förnamn: ");
-                var firstName = Console.ReadLine()?.Trim();
+                string firstName;
+                string lastName;
+                
+                while (true)
+                {
+                    Console.WriteLine("Vänligen ange informationen nedan\n");
+                    Console.Write("Förnamn: ");
+                    firstName = Console.ReadLine()?.Trim();
+                    if (firstName.Length > 2 && firstName.Length < 56)
+                    {
+                        break;
+                    }
+                    else if (firstName.Length <= 2)
+                    {
+                        Console.WriteLine("Ditt namn måste ha minst 3 bokstäver");
+                    }
+                    else if (firstName.Length >= 55)
+                    {
+                        Console.WriteLine("Ditt namn är för långt, kan inte vara längre än 55 bokstäver");
+                    }
 
-                Console.Write("Efternamn: ");
-                var lastName = Console.ReadLine()?.Trim();
+                }
+                
+                while (true)
+                {
+                    Console.Write("Efternamn: ");
+                    lastName = Console.ReadLine()?.Trim();
+                    if (lastName.Length > 2 && lastName.Length < 56)
+                    {
+                        break;
+                    }
+                    else if (lastName.Length <= 2)
+                    {
+                        Console.WriteLine("Ditt efternamn måste ha minst 3 bokstäver");
+                    }
+                    else if (lastName.Length >= 55)
+                    {
+                        Console.WriteLine("Ditt efternamn är för långt, kan inte vara längre än 55 bokstäver");
+                    }
+
+                }
 
                 var roles = context.Roles.ToList();
 
+                // Checks if there is any roles
                 if (!roles.Any())
                 {
                     Console.WriteLine("Det finns inga roller tillgängliga. Lägg till en roll först.");
                     return;
                 }
-
+                
+                // List the available roles
                 Console.WriteLine("\nTillgängliga roller:");
                 foreach (var role in roles)
                 {
@@ -192,10 +229,11 @@ namespace Labb3_SchoolDb
                         LastName = lastName,
                         RoleId = staffRole
                     };
-
-                    context.Staff.Add(newStaff);
-                    context.SaveChanges();
-                    Console.WriteLine("Personal tillagd.");
+                    
+                    // adding the new staff to the databasse and saves
+                    //context.Staff.Add(newStaff);
+                    //context.SaveChanges();
+                    Console.WriteLine("\n**** Personal tillagd ****");
                 }
                 catch (Exception ex)
                 {
