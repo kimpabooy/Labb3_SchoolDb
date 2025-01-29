@@ -11,9 +11,11 @@ public partial class Staff
 
     public string LastName { get; set; } = null!;
 
-    public string? Role { get; set; }
+    public int? RoleId { get; set; }
 
     public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
 
     public virtual ICollection<Grade> Grades { get; set; } = new List<Grade>();
+
+    public virtual Role? Role { get; set; }
 }

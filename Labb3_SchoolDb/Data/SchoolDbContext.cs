@@ -20,6 +20,8 @@ public partial class SchoolDbContext : DbContext
 
     public virtual DbSet<Grade> Grades { get; set; }
 
+    public virtual DbSet<Role> Roles { get; set; }
+
     public virtual DbSet<Staff> Staff { get; set; }
 
     public virtual DbSet<Student> Students { get; set; }
@@ -28,7 +30,7 @@ public partial class SchoolDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source = localhost;Database = SchoolDb;Integrated Security = true;Trust Server Certificate = true;");
+        => optionsBuilder.UseSqlServer("Data Source = localhost;Database=SchoolDb;Trusted_Connection=True;Trust server certificate = true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -78,6 +80,18 @@ public partial class SchoolDbContext : DbContext
                 .HasConstraintName("FK__Grade__Subject_I__4316F928");
         });
 
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.HasKey(e => e.RoleId).HasName("PK__Role__D80AB4BB779FD76C");
+
+            entity.ToTable("Role");
+
+            entity.Property(e => e.RoleId).HasColumnName("Role_Id");
+            entity.Property(e => e.RoleName)
+                .HasMaxLength(55)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<Staff>(entity =>
         {
             entity.HasKey(e => e.StaffId).HasName("PK__Staff__96D4AAF7A18C1AB6");
@@ -89,9 +103,11 @@ public partial class SchoolDbContext : DbContext
             entity.Property(e => e.LastName)
                 .HasMaxLength(55)
                 .IsUnicode(false);
-            entity.Property(e => e.Role)
-                .HasMaxLength(55)
-                .IsUnicode(false);
+            entity.Property(e => e.RoleId).HasColumnName("Role_Id");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.Staff)
+                .HasForeignKey(d => d.RoleId)
+                .HasConstraintName("FK__Staff__Role_Id__49C3F6B7");
         });
 
         modelBuilder.Entity<Student>(entity =>
