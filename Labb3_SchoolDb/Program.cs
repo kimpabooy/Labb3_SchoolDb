@@ -6,11 +6,8 @@ namespace Labb3_SchoolDb
     {
         static void Main(string[] args)
         {
-            DatabaseManager dbM = new DatabaseManager();
-            //dbM.GetAllStudents();
-            //dbM.GetAllStudentsInAClass();
-            //dbM.AddStaff();
-            Console.ReadKey();
+            var menu = new Menu();
+            menu.UserMenu();
         }
     }
 }

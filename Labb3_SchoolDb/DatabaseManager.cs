@@ -102,6 +102,8 @@ namespace Labb3_SchoolDb
                 {
                     Console.WriteLine($"{student.FirstName} {student.LastName}");
                 }
+                Console.WriteLine("\nTryck på valfri tangent för återgå till menyn...");
+                Console.ReadKey();
             }
         }
 
@@ -141,6 +143,8 @@ namespace Labb3_SchoolDb
                 {
                     Console.WriteLine("Ingen klass hittad");
                 }
+                Console.WriteLine("\nTryck på valfri tangent för återgå till menyn...");
+                Console.ReadKey();
             }
         }
 
@@ -148,7 +152,7 @@ namespace Labb3_SchoolDb
         {
             using (var context = new SchoolDbContext())
             {
-                
+                Console.WriteLine("Vänligen ange informationen nedan\n");
                 Console.Write("Förnamn: ");
                 var firstName = Console.ReadLine()?.Trim();
 
@@ -198,6 +202,8 @@ namespace Labb3_SchoolDb
                     Console.WriteLine($"Ett fel inträffade vid tilldelning av personal: {ex.Message}");
                 }
             }
+            Console.WriteLine("\nTryck på valfri tangent för återgå till menyn...");
+            Console.ReadKey();
         }
     }
 }
